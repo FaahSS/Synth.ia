@@ -45,7 +45,7 @@ public class QuestaoDAO {
  */
 
 public String gravar(Questao q) throws Exception{
-	PreparedStatement stmt = con.prepareStatement("INSERT INTO T_SIC_QUESTAO (CD_QUESTAO, NR_TIPO, DS_ENUNCIADO, DS_GABARITO, DS_ALTERNATIVA, CD_PESO) VALUES (?,?,?,?,?,?)");
+	PreparedStatement stmt = con.prepareStatement("INSERT INTO T_SIC_QUESTAO (CD_QUESTAO, DS_TIPO, DS_ENUNCIADO, DS_GABARITO, DS_ALTERNATIVA, CD_PESO) VALUES (?,?,?,?,?,?)");
 	
 	stmt.setInt(1, q.getCodigo());
 	stmt.setInt(2, q.getTipo());
@@ -80,16 +80,16 @@ public Questao consultarPorNumero(int numero) throws Exception{
 	if(rs.next()) {
 		return new Questao
 				(rs.getInt("CD_QUESTAO"),
-			     rs.getInt("NR_TIPO"),
+			     rs.getInt("DS_TIPO"),
 				 rs.getString("DS_ENUNCIADO"),
 				 rs.getString("DS_GABARITO"),
 				 rs.getString("DS_ALTERNATIVA"),
 				    new Peso(
 						 rs.getInt("CD_PESO"),
-						 rs.getInt("NR_PESO_GRAMATICA"),
-						 rs.getInt("NR_PESO_VOCABULARIO"),
-						 rs.getInt("NR_PESO_INTERPRETACAO"),
-						 rs.getInt("NR_PESO_IMERSAO"))
+						 rs.getInt("NR_NIVEL_GRAMATICA"),
+						 rs.getInt("NR_NIVEL_VOCABULARIO"),
+						 rs.getInt("NR_NIVEL_INTERPRETACAO"),
+						 rs.getInt("NR_NIVEL_IMERSAO"))
 						);
 	}else {
 		return new Questao();
@@ -118,7 +118,7 @@ public int apagar(int numero) throws Exception {
  * @author Fábio Salgarella
  */
 public String atualizar(Questao q) throws Exception {
-	stmt = con.prepareStatement("UPDATE T_SIC_QUESTAO SET NR_TIPO=?, DS_ENUNCIADO=?, DS_GABARITO=?, DS_ALTERNATIVA=?, CD_PESO=? WHERE CD_QUESTAO=?");
+	stmt = con.prepareStatement("UPDATE T_SIC_QUESTAO SET DS_TIPO=?, DS_ENUNCIADO=?, DS_GABARITO=?, DS_ALTERNATIVA=?, CD_PESO=? WHERE CD_QUESTAO=?");
 	stmt.setInt(6, q.getCodigo());
 	stmt.setInt(1, q.getTipo());
 	stmt.setString(2, q.getEnunciado());

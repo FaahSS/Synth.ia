@@ -15,7 +15,7 @@ public class Questao {
 				"Enunciado.: "+enunciado+"\n"+
 				"Gabarito..: "+gabarito+"\n"+
 				"Alternativa: "+alternativa+"\n"+
-				"Peso......: "+peso;
+				"Peso......: "+peso.getAll();
 	}
 	
 	//SetAll

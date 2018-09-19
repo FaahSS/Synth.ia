@@ -21,6 +21,7 @@ import connection.Conexao;
  * @see NivelamentoBeans
  */
 public class NivelamentoDAO {
+	
 	private Connection con;
 	private PreparedStatement stmt;
 	private ResultSet rs;

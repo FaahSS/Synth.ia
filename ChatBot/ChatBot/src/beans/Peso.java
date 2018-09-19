@@ -26,8 +26,14 @@ public class Peso {
 	}
 	
 	//Construtores
+
 	public Peso() {
 		super();
+	}
+
+	public Peso(int codigo) {
+		super();
+		setCodigo(codigo);
 	}
 	public Peso(int codigo, int gramatica, int vocabulario, int interpretacao, int imersao) {
 		super();
