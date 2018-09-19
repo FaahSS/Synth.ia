@@ -1,0 +1,155 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import beans.Endereco;
+import beans.Peso;
+import beans.Questao;
+import beans.Usuario;
+import connection.Conexao;
+
+public class QuestaoDAO {
+	private Connection con;
+	private PreparedStatement stmt;
+	private ResultSet rs;
+	
+	public QuestaoDAO() throws Exception {
+		con = new Conexao().conectar();
+	}
+}
+
+/**
+ * Responsável por adicionar uma linha na tabela T_SIC_QUESTAO
+ * @param q Recebe um objeto do Tipo Questao Beans
+ * @return Uma string com a mensagem de confirmação.
+ * @throws Exception Chamada da exceção checked.
+ * @author Fábio Salgarella
+ */
+
+public String gravar(Questao q) throws Exception{
+	PreparedStatement stmt = con.prepareStatement("INSERT INTO T_SIC_QUESTAO (CD_QUESTAO, NR_TIPO, DS_ENUNCIADO, DS_GABARITO, DS_ALTERNATIVA, CD_PESO) VALUES (?,?,?,?,?,?)");
+	
+	stmt.setInt(1, q.getCodigo());
+	stmt.setInt(2, q.getTipo());
+	stmt.setString(3, q.getEnunciado());
+	stmt.setString(4, q.getGabarito());
+	stmt.setString(5, q.getAlternativa());
+	stmt.setInt(6, q.getPeso().getCodigo());
+	
+	stmt.executeUpdate();
+	
+	return "Cadastrado com Sucesso!";
+	
+	
+}
+
+/**
+ * Responsável por consultar uma linha na tabela T_SIC_QUESTAO
+ * @param numero Recebe um objeto do Tipo Integer.
+ * @return Uma ocorrência na tabela T_SIC_QUESTAO.
+ * @throws Exception Chamada da exceção checked.
+ * @author Fábio Salgarella
+ */
+
+public Usuario consultarPorNumero(int numero) throws Exception{
+	stmt = con.prepareStatement
+			("SELECT * FROM T_SIC_QUESTAO INNER JOIN T_SIC_PESO ON (T_SIC_QUESTAO.CD_PESO = T_SIC_PESO.CD_PESO) WHERE CD_QUESTAO=?");
+	
+	stmt.setInt(1, numero);
+
+	rs = stmt.executeQuery();
+	
+	if(rs.next()) {
+		return new Questao
+				(rs.getInt("CD_QUESTAO"),
+			     rs.getInt("NR_TIPO"),
+				 rs.getString("DS_ENUNCIADO"),
+				 rs.getString("DS_GABARITO"),
+				 rs.getString("DS_ALTERNATIVA"),
+				    new Peso(
+						 rs.getInt("CD_PESO"),
+						 rs.getInt("NR_PESO_GRAMATICA"),
+						 rs.getInt("NR_PESO_VOCABULARIO"),
+						 rs.getInt("NR_PESO_INTERPRETACAO"),
+						 rs.getInt("NR_PESO_IMERSAO"))
+						);
+	}else {
+		return new Usuario();
+	}
+}
+
+/**
+ * Responsável por consultar várias linha na tabela T_SIC_USUARIO
+ * @param nome Recebe um objeto do Tipo String.
+ * @return Uma lista na tabela T_SIC_USUARIO.
+ * @throws Exception Chamada da exceção checked.
+ * @author Fábio Salgarella
+ */
+public List<Usuario> consultarPorNome(String nome) throws Exception{
+	List<Usuario> lista = new ArrayList<Usuario>();
+	stmt = con.prepareStatement
+			("SELECT * FROM T_SIC_USUARIO INNER JOIN T_SIC_ENDERECO ON (T_SIC_USUARIO.CD_ENDERECO = T_SIC_ENDERECO.CD_ENDERECO) WHERE NM_CLIENTE LIKE ?");
+	stmt.setString(1, "%" + nome + "%");
+	
+	rs = stmt.executeQuery();
+	
+	while(rs.next()) {
+		lista.add(new Usuario
+				(rs.getInt("NR_CLIENTE"),
+					     rs.getString("NM_CLIENTE"),
+						 rs.getString("DS_EMAIL"),
+						 rs.getString("DS_SENHA"),
+						 rs.getString("DS_SEXO"),
+						 rs.getDate("DT_NASCIMENTO"),
+						 rs.getString("NR_CPF"),
+						 rs.getInt("NR_TIPO"),
+								new Endereco(
+										rs.getInt("CD_ENDERECO"),
+										rs.getString("NR_CEP"),
+										rs.getString("DS_UF"),
+										rs.getString("DS_CIDADE"),
+										rs.getString("DS_LOGRADOURO"),
+										rs.getString("DS_NUMERO")
+										)
+								));	
+	}
+		return lista;
+	
+}
+/**
+ * Responsável por apagar uma linha na tabela T_SIC_USUARIO
+ * @param numero Recebe um objeto do Tipo Integer.
+ * @return O número de linhas afetadas.
+ * @throws Exception Chamada da exceção checked.
+ * @author Fábio Salgarella
+ */
+
+public int apagar(int numero) throws Exception {
+	stmt = con.prepareStatement("DELETE FROM T_SIC_USUARIO WHERE NR_CLIENTE=?");
+	stmt.setInt(1, numero);
+	return stmt.executeUpdate();
+}
+/**
+ * Responsável por apagar uma linha na tabela T_SIC_USUARIO
+ * @param u Recebe um objeto do Tipo Usuario Beans.
+ * @return O número de linhas alteradas.
+ * @throws Exception Chamada da exceção checked.
+ * @author Fábio Salgarella
+ */
+public String atualizar(Usuario u) throws Exception {
+	stmt = con.prepareStatement("UPDATE T_SIC_USUARIO SET NM_CLIENTE=?, DS_EMAIL=?, DS_SENHA=?, DS_SEXO=?, DT_NASCIMENTO=?, NR_CPF=?, CD_ENDERECO=?, NR_TIPO WHERE CD_USUARIO=?");
+	stmt.setString(1, u.getNome());
+	stmt.setString(2, u.getEmail());
+	stmt.setString(3, u.getSenha());
+	stmt.setString(4, u.getSexo());
+	stmt.setDate(5, (Date)u.getNascimento());
+	stmt.setString(6, u.getCpf());
+	stmt.setInt(7, u.getEndereco().getCodigo());
+	return stmt.executeUpdate() + " linhas foram afetadas!";
+}
+}

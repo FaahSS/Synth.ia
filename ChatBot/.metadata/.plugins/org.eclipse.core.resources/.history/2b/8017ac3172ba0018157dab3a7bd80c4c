@@ -1,0 +1,18 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import connection.Conexao;
+
+public class AlternativaDAO {
+	private Connection con;
+	private PreparedStatement stmt;
+	private ResultSet rs;
+	
+	public AlternativaDAO() throws Exception {
+		con = new Conexao().conectar();
+	}
+
+}

@@ -1,0 +1,20 @@
+INDEX VERSION 1.130+D:\Documentos\FIAP\ChatBot\.metadata\.plugins\org.eclipse.jdt.core
+82170673.index
+1160440109.index
+2826224796.index
+1328578050.index
+563193121.index
+744757495.index
+952248465.index
+3079912427.index
+899572170.index
+1957519516.index
+615075970.index
+4080222043.index
+1388790705.index
+1051705750.index
+3787148219.index
+2368812488.index
+1894984166.index
+4179594367.index
+3574211298.index

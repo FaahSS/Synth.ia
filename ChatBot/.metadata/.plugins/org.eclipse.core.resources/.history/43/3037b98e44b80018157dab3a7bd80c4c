@@ -1,0 +1,107 @@
+package beans;
+
+public class QuestaoAlternativa {
+	private int codigo;
+	private Nivel codigoNivel;
+	private String questao;
+	private String alternativaA;
+	private String alternativaB;
+	private String alternativaC;
+	private String alternativaD;
+	private String gabarito;
+	
+	//GetAll
+	public String getAll() {
+		return "Codigo: "+codigo+"\n"+
+			   "Código Nivel: "+codigoNivel+"\n"+
+			   "Descrição da Questão: "+questao+"\n"+
+			   "Alternativa A.......: "+alternativaA+"\n"+
+			   "Alternativa B.......: "+alternativaB+"\n"+
+			   "Alternativa C.......: "+alternativaC+"\n"+
+			   "Alternativa D.......: "+alternativaD+"\n"+
+			   "Gabarito............: "+gabarito;
+	}
+	
+	//SetAll
+	public void setAll(int codigo, Nivel codigoNivel, String questao, String alternativaA, String alternativaB,
+			String alternativaC, String alternativaD, String gabarito) {
+		setCodigo(codigo);
+		setCodigoNivel(codigoNivel);
+		setQuestao(questao);
+		setAlternativaA(alternativaA);
+		setAlternativaB(alternativaB);
+		setAlternativaC(alternativaC);
+		setAlternativaD(alternativaD);
+		setGabarito(gabarito);
+	}
+	//Construtores
+	public QuestaoAlternativa() {
+		super();
+	}
+	public QuestaoAlternativa(int codigo, Nivel codigoNivel, String questao, String alternativaA, String alternativaB,
+			String alternativaC, String alternativaD, String gabarito) {
+		super();
+		setCodigo(codigo);
+		setCodigoNivel(codigoNivel);
+		setQuestao(questao);
+		setAlternativaA(alternativaA);
+		setAlternativaB(alternativaB);
+		setAlternativaC(alternativaC);
+		setAlternativaD(alternativaD);
+		setGabarito(gabarito);
+	}
+	//Getters & Setters
+	public int getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	public Nivel getCodigoNivel() {
+		return codigoNivel;
+	}
+	public void setCodigoNivel(Nivel codigoNivel) {
+		this.codigoNivel = codigoNivel;
+	}
+	public String getQuestao() {
+		return questao;
+	}
+	public void setQuestao(String questao) {
+		this.questao = questao;
+	}
+	public String getAlternativaA() {
+		return alternativaA;
+	}
+	public void setAlternativaA(String alternativaA) {
+		this.alternativaA = alternativaA;
+	}
+	public String getAlternativaB() {
+		return alternativaB;
+	}
+	public void setAlternativaB(String alternativaB) {
+		this.alternativaB = alternativaB;
+	}
+	public String getAlternativaC() {
+		return alternativaC;
+	}
+	public void setAlternativaC(String alternativaC) {
+		this.alternativaC = alternativaC;
+	}
+	public String getAlternativaD() {
+		return alternativaD;
+	}
+	public void setAlternativaD(String alternativaD) {
+		this.alternativaD = alternativaD;
+	}
+	public String getGabarito() {
+		return gabarito;
+	}
+	public void setGabarito(String gabarito) {
+		gabarito = gabarito;
+	}
+	
+	
+	
+	
+
+}

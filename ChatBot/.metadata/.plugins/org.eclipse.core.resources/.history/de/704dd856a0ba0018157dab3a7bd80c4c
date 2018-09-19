@@ -1,0 +1,25 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import connection.Conexao;
+
+public class UsuarioDAO {
+	private Connection con;
+	private PreparedStatement stmt;
+	private ResultSet rs;
+	
+	public UsuarioDAO() throws Exception {
+		con = new Conexao().conectar();
+	}
+	
+	/**
+	 * Responsável por adicionar uma linha na tabela T_SIC_U
+	 * @param alt Recebe um objeto do Tipo Alternativa Beans
+	 * @return Uma string com a mensagem de confirmação.
+	 * @throws Exception Chamada da exceção checked.
+	 * @author Fábio Salgarella
+	 */
+}

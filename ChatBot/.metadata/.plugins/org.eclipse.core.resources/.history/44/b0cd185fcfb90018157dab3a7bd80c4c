@@ -1,0 +1,95 @@
+package beans;
+
+import java.util.Date;
+
+public class Aluno {
+	private int matricula;
+	private String nome;
+	private String email;
+	private String sexo;
+	private Date data;
+	private Endereco endereco;
+	private int acesso;
+	
+	//GetAll
+	public String getAll() {
+		return "Número de Matricula: "+matricula+"\n"+
+			   "Nome...............: "+nome+"\n"+
+			   "E-mail.............: "+email+"\n"+
+			   "Sexo...............: "+sexo+"\n"+
+			   "Data...............: "+data+"\n"+
+			   "Endereço...........: "+endereco+"\n"+
+			   "Nível de Acesso....: "+acesso;
+	}
+	//SetAll
+	public void setAll(int matricula, String nome, String email, String sexo, Date data, Endereco endereco, int acesso) {
+		setMatricula(matricula);
+		setNome(nome);
+		setEmail(email);
+		setSexo(sexo);
+		setData(data);
+		setEndereco(endereco);
+		setAcesso(acesso);
+	}
+	//Construtores
+	public Aluno() {
+		super();
+	}
+	public Aluno(int matricula, String nome, String email, String sexo, Date data, Endereco endereco, int acesso) {
+		super();
+		setMatricula(matricula);
+		setNome(nome);
+		setEmail(email);
+		setSexo(sexo);
+		setData(data);
+		setEndereco(endereco);
+		setAcesso(acesso);
+	}
+	//Getters & Setters
+	
+	public int getMatricula() {
+		return matricula;
+	}
+	public void setMatricula(int matricula) {
+		this.matricula = matricula;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	public Date getData() {
+		return data;
+	}
+	public void setData(Date data) {
+		this.data = data;
+	}
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	public int getAcesso() {
+		return acesso;
+	}
+	public void setAcesso(int acesso) {
+		this.acesso = acesso;
+	}
+	
+	
+
+}

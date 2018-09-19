@@ -1,0 +1,58 @@
+package beans;
+
+import java.util.Date;
+
+public class Nivelamento {
+	private int codigo;
+	private Prospect id;
+	private Aluno matricula;
+	private Date data;
+	
+	
+	
+	
+	public String getAll() {
+		return "Código: "+codigo+"\n"+
+			   "Id Prospect"
+	}
+	//Construtores
+	public Nivelamento() {
+		super();
+	}
+	public Nivelamento(int codigo, Prospect id, Aluno matricula, Date data) {
+		super();
+		setCodigo(codigo);
+		setId(id);
+		setMatricula(matricula);
+		setNivelamento(data);
+	}
+	//Getters & Setters
+	
+	public int getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	public Prospect getId() {
+		return id;
+	}
+	public void setId(Prospect id) {
+		this.id = id;
+	}
+	public Aluno getMatricula() {
+		return matricula;
+	}
+	public void setMatricula(Aluno matricula) {
+		this.matricula = matricula;
+	}
+	public Date getData() {
+		return data;
+	}
+	public void setNivelamento(Date data) {
+		this.data = data;
+	}
+	
+	
+	
+}

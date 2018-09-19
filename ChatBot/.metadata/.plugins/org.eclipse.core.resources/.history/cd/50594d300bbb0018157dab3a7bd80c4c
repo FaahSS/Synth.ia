@@ -1,0 +1,74 @@
+package beans;
+
+public class Questao {
+	private int codigo;
+	private int tipo;
+	private Peso peso;
+	private String enunciado;
+	private String gabarito;
+	
+	//getAll
+	public String getAll() {
+		return "Código....: "+codigo+"\n"+
+				"Tipo.....: "+tipo+"\n"+
+				"Peso.....: "+peso+"\n"+
+				"Enunciado: "+enunciado+"\n"+
+				"Gabarito.: "+gabarito;
+	}
+	
+	//SetAll
+	public void setAll(int codigo, int tipo, Peso peso, String enunciado, String gabarito) {
+		setCodigo(codigo);
+		setTipo(tipo);
+		setPeso(peso);
+		setEnunciado(enunciado);
+		setGabarito(gabarito);
+	}
+	//Construtores
+	public Questao() {
+		super();
+	}
+	public Questao(int codigo, int tipo, Peso peso, String enunciado, String gabarito) {
+		super();
+		setCodigo(codigo);
+		setTipo(tipo);
+		setPeso(peso);
+		setEnunciado(enunciado);
+		setGabarito(gabarito);
+	}
+	//Getters & Setters
+	public int getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	public int getTipo() {
+		return tipo;
+	}
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+	public Peso getPeso() {
+		return peso;
+	}
+	public void setPeso(Peso peso) {
+		this.peso = peso;
+	}
+	public String getEnunciado() {
+		return enunciado;
+	}
+	public void setEnunciado(String enunciado) {
+		this.enunciado = enunciado;
+	}
+	public String getGabarito() {
+		return gabarito;
+	}
+	public void setGabarito(String gabarito) {
+		this.gabarito = gabarito;
+	}
+	
+	
+	
+
+}

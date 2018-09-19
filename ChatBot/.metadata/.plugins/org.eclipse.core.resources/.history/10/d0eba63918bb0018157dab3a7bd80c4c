@@ -1,0 +1,36 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import connection.Conexao;
+
+/**
+ * Esta classe manipula a tabela T_SIC_NIVELAMENTO
+ * possui métodos para: Cadastrar, consultar, alterar e excluir
+ * @author Fábio Salgarella
+ * @version 1.0
+ * @since 1.0
+ * @see NivelamentoBO
+ * @see NivelamentoBeans
+ */
+public class NivelamentoDAO {
+	private Connection con;
+	private PreparedStatement stmt;
+	private ResultSet rs;
+	
+	/**
+	 * Neste método construtor, estabelecemos a comunicação com o banco de dados.
+	 * @author Fábio Salgarella
+	 * @param não possui parâmetros
+	 * @eturn não há retorno
+	 * @throws Exception Chamada da exceção checked SQLException
+	 */
+	
+	public NivelamentoDAO() throws Exception {
+		con = new Conexao().conectar();
+	}
+	
+	
+}
