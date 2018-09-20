@@ -43,7 +43,7 @@ public class UsuarioDAO {
 	 */
 	
 	public String gravar(Usuario u) throws Exception{
-		PreparedStatement stmt = con.prepareStatement("INSERT INTO T_SIC_USUARIO (CD_CLIENTE, NM_CLIENTE, DS_EMAIL, DS_SENHA, DS_SEXO, DT_NASCIMENTO, NR_CPF, CD_ENDERECO, NR_TIPO  ) VALUES (?,?,?,?,?,TO_DATE(?,'DD/MM/YYYY'),?,?,?)");
+		PreparedStatement stmt = con.prepareStatement("INSERT INTO T_SIC_USUARIO (CD_CLIENTE, NM_CLIENTE, DS_EMAIL, DS_SENHA, DS_SEXO, DT_NASCIMENTO, NR_CPF, NR_TIPO , CD_ENDERECO   ) VALUES (?,?,?,?,?,TO_DATE(?,'DD/MM/YYYY'),?,?,?)");
 		
 		stmt.setInt(1, u.getCodigo());
 		stmt.setString(2, u.getNome());
@@ -52,8 +52,10 @@ public class UsuarioDAO {
 		stmt.setString(5, u.getSexo());
 		stmt.setString(6, u.getNascimento());
 		stmt.setString(7, u.getCpf());
-		stmt.setInt(8, u.getEndereco().getCodigo());
-		stmt.setInt(9, u.getTipo());
+		stmt.setInt(8, u.getTipo());
+		stmt.setInt(9, u.getEndereco().getCodigo());
+		
+
 		
 		stmt.executeUpdate();
 		
@@ -112,14 +114,14 @@ public class UsuarioDAO {
 	public List<Usuario> consultarPorNome(String nome) throws Exception{
 		List<Usuario> lista = new ArrayList<Usuario>();
 		stmt = con.prepareStatement
-				("SELECT * FROM T_SIC_USUARIO INNER JOIN T_SIC_ENDERECO ON (T_SIC_USUARIO.CD_ENDERECO = T_SIC_ENDERECO.CD_ENDERECO) WHERE NM_CLIENTE LIKE ?");
+				("SELECT * FROM T_SIC_USUARIO INNER JOIN T_SIC_ENDERECO ON (T_SIC_USUARIO.CD_ENDERECO = T_SIC_ENDERECO.CD_ENDERECO) WHERE NM_USUARIO LIKE ?");
 		stmt.setString(1, "%" + nome + "%");
 		
 		rs = stmt.executeQuery();
 		
 		while(rs.next()) {
 			lista.add(new Usuario
-					(rs.getInt("NR_CLIENTE"),
+					(rs.getInt("CD_USUARIO"),
 						     rs.getString("NM_USUARIO"),
 							 rs.getString("DS_EMAIL"),
 							 rs.getString("DS_SENHA"),
@@ -149,7 +151,7 @@ public class UsuarioDAO {
 	 */
 	
 	public int apagar(int numero) throws Exception {
-		stmt = con.prepareStatement("DELETE FROM T_SIC_USUARIO WHERE NM_USUARIO=?");
+		stmt = con.prepareStatement("DELETE FROM T_SIC_USUARIO WHERE CD_USUARIO=?");
 		stmt.setInt(1, numero);
 		return stmt.executeUpdate();
 	}

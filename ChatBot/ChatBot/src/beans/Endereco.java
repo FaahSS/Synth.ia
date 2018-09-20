@@ -44,7 +44,10 @@ public class Endereco {
 		setLogradouro(logradouro);
 		setNumero(numero);
 	}
-	
+	public Endereco(int codigo) {
+		super();
+		setCodigo(codigo);
+	}
 	
 	//Getters & Setters
 	public int getCodigo() {
