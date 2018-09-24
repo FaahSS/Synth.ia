@@ -175,5 +175,8 @@ public class UsuarioDAO {
 		stmt.setInt(8, u.getEndereco().getCodigo());
 		return stmt.executeUpdate() + " linhas foram afetadas!";
 	}
+	public void fechar() throws Exception {
+		con.close();
+	}
 	
 }

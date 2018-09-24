@@ -34,6 +34,14 @@ public class Nivelamento {
 	public Nivelamento() {
 		super();
 	}
+	public Nivelamento(int codigo, int acerto, String data, String tipo,Usuario codigoUsuario) {
+		super();
+		setCodigo(codigo);
+		setAcerto(acerto);
+		setData(data);
+		setTipo(tipo);
+		setCodigoUsuario(codigoUsuario);
+	}
 	public Nivelamento(int codigo, int acerto, String data, String tipo,Usuario codigoUsuario, List<Questao> questao) {
 		super();
 		setCodigo(codigo);
@@ -73,7 +81,7 @@ public class Nivelamento {
 		return tipo;
 	}
 	public void setTipo(String tipo) {
-		this.tipo = tipo;
+		this.tipo = tipo.toUpperCase();
 	}
 	public List<Questao> getQuestao() {
 		return questao;

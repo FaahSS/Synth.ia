@@ -1,6 +1,7 @@
 package bo;
 
 import beans.PesquisaSatisfacao;
+import dao.PesquisaSatisfacaoDAO;
 
 /**
  * Classe responsável por manipular as regras relacionadas a PesquisaSatisfacao
@@ -26,7 +27,15 @@ public class PesquisaSatisfacaoBO {
 			return "Comentário muito grande!";
 		}
 		
-		return "";
+		PesquisaSatisfacaoDAO dao = new PesquisaSatisfacaoDAO();
+		PesquisaSatisfacao pesq = dao.consultarPorNumero(p.getCodigo());
+		String result = null;
+		
+		if(pesq.getCodigo()==0) {
+			result = dao.gravar(p);
+		}
+		dao.fechar();
+		return result;
 	}
 	
 }

@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
 import beans.Endereco;
 import beans.Nivelamento;
+import beans.Questao;
 import beans.Usuario;
 import bo.NivelamentoBO;
 import connection.Conexao;
@@ -37,6 +37,17 @@ public class NivelamentoDAO {
 	public NivelamentoDAO() throws Exception {
 		con = new Conexao().conectar();
 	}
+	
+	public void adicionarQuestao(Nivelamento n,Questao q) {
+		n.getQuestao().add(q);
+	}
+	
+	public void excluirQuestao(Nivelamento n, Questao q) {
+		n.getQuestao().remove(q);
+	}
+	public void qtdQuestoes(Nivelamento n, Questao q) {
+		n.getQuestao().size();
+	}
 	/**
 	 * Responsável por adicionar uma linha na tabela T_SIC_NIVELAMENTO
 	 * @param n Recebe um objeto do Tipo Nivelamento Beans
@@ -46,7 +57,8 @@ public class NivelamentoDAO {
 	 */
 	
 	public String gravar(Nivelamento n) throws Exception{
-		PreparedStatement stmt = con.prepareStatement("INSERT INTO T_SIC_NIVELAMENTO (CD_NIVELAMENTO, NR_ACERTO, DT_NIVELAMENTO, DS_TIPO, CD_USUARIO) VALUES (?,?,TO_DATE(?,'DD/MM/YYYY'),?,?)");
+		PreparedStatement stmt = con.prepareStatement("INSERT INTO T_SIC_NIVELAMENTO (CD_NIVELAMENTO, NR_ACERTO, DT_NIVELAMENTO"
+				+ ", DS_TIPO, CD_USUARIO) VALUES (?,?,TO_DATE(?,'DD/MM/YYYY'),?,?)");
 		
 		stmt.setInt(1, n.getCodigo());
 		stmt.setInt(2, n.getAcerto());
@@ -77,25 +89,19 @@ public class NivelamentoDAO {
 	
 		rs = stmt.executeQuery();
 		
-		if(rs.next()) {
-			
-			//lista
-			
-			
+		if(rs.next()) {	
 			return  new Nivelamento
 					(rs.getInt("CD_NIVELAMENTO"),
 					 rs.getInt("NR_ACERTO"),
 					 rs.getString("DT_NIVELAMENTO"),
 					 rs.getString("DS_TIPO"),
-					 lista
-					 
 					new Usuario
 					(rs.getInt("NR_CLIENTE"),
 				     rs.getString("NM_CLIENTE"),
 					 rs.getString("DS_EMAIL"),
 					 rs.getString("DS_SENHA"),
 					 rs.getString("DS_SEXO"),
-					 rs.getDate("DT_NASCIMENTO"),
+					 rs.getString("DT_NASCIMENTO"),
 					 rs.getString("NR_CPF"),
 					 rs.getInt("NR_TIPO"),
 					 new Endereco(
@@ -142,6 +148,10 @@ public class NivelamentoDAO {
 		stmt.setInt(4, n.getCodigoUsuario().getCodigo());
 		
 		return stmt.executeUpdate() + " linhas foram afetadas!";
+	}
+	
+	public void fechar() throws Exception {
+		con.close();
 	}
 	
 }

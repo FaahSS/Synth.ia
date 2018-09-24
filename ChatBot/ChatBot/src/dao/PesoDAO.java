@@ -117,4 +117,8 @@ public class PesoDAO {
 		
 		return stmt.executeUpdate() + " linhas foram afetadas!";
 	}
+	
+	public void fechar() throws Exception {
+		con.close();
+	}
 }

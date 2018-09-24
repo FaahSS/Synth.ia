@@ -142,4 +142,7 @@ public class PesquisaSatisfacaoDAO {
 		
 		return stmt.executeUpdate() + " linhas foram afetadas!";
 	}
+	public void fechar() throws Exception {
+		con.close();
+	}
 }

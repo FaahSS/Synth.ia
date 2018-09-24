@@ -1,6 +1,7 @@
 package bo;
 
 import beans.Peso;
+import dao.PesoDAO;
 
 /**
  * Classe responsável por manipular as regras relacionadas a Peso
@@ -25,8 +26,18 @@ public class PesoBO {
 	 if(p.getImersao()<0 || p.getImersao()>10) {
 		 return "Peso inválido!";
 	 }
+	 if(p.getCodigo()<1) {
+		 return "Código não existe!";
+	 }
 	 
-	 return "";
+	 PesoDAO dao = new PesoDAO();
+	 Peso peso = dao.consultarPorNumero(p.getCodigo());
+	 String result = null;
 	 
- }
+	 if(peso.getCodigo()==0) {
+		 result = dao.gravar(p);
+	 }
+	 dao.fechar();
+	 return result;
+	 }
 }

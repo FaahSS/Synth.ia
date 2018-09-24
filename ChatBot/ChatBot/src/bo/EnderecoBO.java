@@ -1,6 +1,7 @@
 package bo;
 
 import beans.Endereco;
+import dao.EnderecoDAO;
 
 /**
  * Classe responsável por manipular as regras relacionadas ao Endereco
@@ -14,9 +15,7 @@ import beans.Endereco;
 public class EnderecoBO {
 	public static String novoEndereco(Endereco e) throws Exception {
 	if(e.getCep().length()!=9) {
-		return /*x= e.getCep().substring(7, e.getCep().length());
-			      e.getCep().substring(7) = "-";	*/
-				"CEP Inválido!";
+		return "CEP Inválido! Verifique se inseriu '-' antes dos 3 números finais!";
 	}
 	if(e.getUf().length()!=2) {
 		return "UF inválida";
@@ -30,8 +29,16 @@ public class EnderecoBO {
 	if(e.getNumero().length()<1 || e.getNumero().length()>8) {
 		return "Numero invalido!";
 	}
+		EnderecoDAO dao = new EnderecoDAO();
+		Endereco ende = dao.consultarPorNumero(e.getCodigo());
+		String result = null;
 		
-		return"";
+		if(ende.getCodigo()==0) {
+			result = dao.gravar(e);
+		}
+		dao.fechar();
+		return result;
+		
 	}
 
 }

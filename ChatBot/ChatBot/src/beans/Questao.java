@@ -10,12 +10,12 @@ public class Questao {
 	
 	//getAll
 	public String getAll() {
-		return "Código.....: "+codigo+"\n"+
-				"Tipo......: "+tipo+"\n"+
-				"Enunciado.: "+enunciado+"\n"+
-				"Gabarito..: "+gabarito+"\n"+
+		return "Código......: "+codigo+"\n"+
+				"Tipo.......: "+tipo+"\n"+
+				"Enunciado..: "+enunciado+"\n"+
+				"Gabarito...: "+gabarito+"\n"+
 				"Alternativa: "+alternativa+"\n"+
-				"Peso......: "+peso.getAll();
+				"Peso.......: "+peso.getAll();
 	}
 	
 	//SetAll
