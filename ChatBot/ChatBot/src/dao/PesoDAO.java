@@ -118,6 +118,11 @@ public class PesoDAO {
 		return stmt.executeUpdate() + " linhas foram afetadas!";
 	}
 	
+	/**
+	 * Responsável por fechar conexão com o banco
+	 * @throws Exception Chamada da exceção checked.
+	 * @author Fábio Salgarella
+	 */
 	public void fechar() throws Exception {
 		con.close();
 	}

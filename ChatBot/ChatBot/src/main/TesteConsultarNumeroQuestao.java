@@ -2,7 +2,6 @@ package main;
 
 import javax.swing.JOptionPane;
 
-import beans.Peso;
 import beans.Questao;
 import dao.QuestaoDAO;
 import exception.Excecao;

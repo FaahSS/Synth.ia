@@ -1,7 +1,7 @@
 package beans;
 
 
-public class PesquisaSatisfacao {
+public class PesquisaSatisfacao implements Comparable<PesquisaSatisfacao> {
 	private int codigo;
 	private String data;
 	private int infraestrutura; //quantidade de estrelas
@@ -9,6 +9,11 @@ public class PesquisaSatisfacao {
 	private int aula;
 	private String comentario;
 	private Usuario codigoUsuario;
+	
+	//CompareTo
+		public int compareTo(PesquisaSatisfacao outraPesq) {
+			return this.data.compareTo(outraPesq.data);
+		}
 	
 	//GetAll
 	public String getAll() {

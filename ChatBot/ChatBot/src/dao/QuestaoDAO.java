@@ -22,7 +22,7 @@ public class QuestaoDAO {
 	private Connection con;
 	private PreparedStatement stmt;
 	private ResultSet rs;
-	
+
 	/**
 	 * Neste método construtor, estabelecemos a comunicação com o banco de dados.
 	 * @author Fábio Salgarella
@@ -30,105 +30,110 @@ public class QuestaoDAO {
 	 * @eturn não há retorno
 	 * @throws Exception Chamada da exceção checked SQLException
 	 */
-	
+
 	public QuestaoDAO() throws Exception {
 		con = new Conexao().conectar();
 	}
 
 
-/**
- * Responsável por adicionar uma linha na tabela T_SIC_QUESTAO
- * @param q Recebe um objeto do Tipo Questao Beans
- * @return Uma string com a mensagem de confirmação.
- * @throws Exception Chamada da exceção checked.
- * @author Fábio Salgarella
- */
+	/**
+	 * Responsável por adicionar uma linha na tabela T_SIC_QUESTAO
+	 * @param q Recebe um objeto do Tipo Questao Beans
+	 * @return Uma string com a mensagem de confirmação.
+	 * @throws Exception Chamada da exceção checked.
+	 * @author Fábio Salgarella
+	 */
 
-public String gravar(Questao q) throws Exception{
-	PreparedStatement stmt = con.prepareStatement("INSERT INTO T_SIC_QUESTAO (CD_QUESTAO, DS_TIPO, DS_ENUNCIADO, DS_GABARITO, DS_ALTERNATIVA, CD_PESO) VALUES (?,?,?,?,?,?)");
-	
-	stmt.setInt(1, q.getCodigo());
-	stmt.setInt(2, q.getTipo());
-	stmt.setString(3, q.getEnunciado());
-	stmt.setString(4, q.getGabarito());
-	stmt.setString(5, q.getAlternativa());
-	stmt.setInt(6, q.getPeso().getCodigo());
-	
-	stmt.executeUpdate();
-	
-	return "Cadastrado com Sucesso!";
-	
-	
-}
+	public String gravar(Questao q) throws Exception{
+		PreparedStatement stmt = con.prepareStatement("INSERT INTO T_SIC_QUESTAO (CD_QUESTAO, DS_TIPO, DS_ENUNCIADO, DS_GABARITO, DS_ALTERNATIVA, CD_PESO) VALUES (?,?,?,?,?,?)");
 
-/**
- * Responsável por consultar uma linha na tabela T_SIC_QUESTAO
- * @param numero Recebe um objeto do Tipo Integer.
- * @return Uma ocorrência na tabela T_SIC_QUESTAO.
- * @throws Exception Chamada da exceção checked.
- * @author Fábio Salgarella
- */
+		stmt.setInt(1, q.getCodigo());
+		stmt.setInt(2, q.getTipo());
+		stmt.setString(3, q.getEnunciado());
+		stmt.setString(4, q.getGabarito());
+		stmt.setString(5, q.getAlternativa());
+		stmt.setInt(6, q.getPeso().getCodigo());
 
-public Questao consultarPorNumero(int numero) throws Exception{
-	stmt = con.prepareStatement
-			("SELECT * FROM T_SIC_QUESTAO INNER JOIN T_SIC_PESO ON (T_SIC_QUESTAO.CD_PESO = T_SIC_PESO.CD_PESO) WHERE CD_QUESTAO=?");
-	
-	stmt.setInt(1, numero);
+		stmt.executeUpdate();
 
-	rs = stmt.executeQuery();
-	
-	if(rs.next()) {
-		return new Questao
-				(rs.getInt("CD_QUESTAO"),
-			     rs.getInt("DS_TIPO"),
-				 rs.getString("DS_ENUNCIADO"),
-				 rs.getString("DS_GABARITO"),
-				 rs.getString("DS_ALTERNATIVA"),
-				    new Peso(
-						 rs.getInt("CD_PESO"),
-						 rs.getInt("NR_NIVEL_GRAMATICA"),
-						 rs.getInt("NR_NIVEL_VOCABULARIO"),
-						 rs.getInt("NR_NIVEL_INTERPRETACAO"),
-						 rs.getInt("NR_NIVEL_IMERSAO"))
-						);
-	}else {
-		return new Questao();
+		return "Cadastrado com Sucesso!";
+
+
 	}
-}
+
+	/**
+	 * Responsável por consultar uma linha na tabela T_SIC_QUESTAO
+	 * @param numero Recebe um objeto do Tipo Integer.
+	 * @return Uma ocorrência na tabela T_SIC_QUESTAO.
+	 * @throws Exception Chamada da exceção checked.
+	 * @author Fábio Salgarella
+	 */
+
+	public Questao consultarPorNumero(int numero) throws Exception{
+		stmt = con.prepareStatement
+				("SELECT * FROM T_SIC_QUESTAO INNER JOIN T_SIC_PESO ON (T_SIC_QUESTAO.CD_PESO = T_SIC_PESO.CD_PESO) WHERE CD_QUESTAO=?");
+
+		stmt.setInt(1, numero);
+
+		rs = stmt.executeQuery();
+
+		if(rs.next()) {
+			return new Questao
+					(rs.getInt("CD_QUESTAO"),
+							rs.getInt("DS_TIPO"),
+							rs.getString("DS_ENUNCIADO"),
+							rs.getString("DS_GABARITO"),
+							rs.getString("DS_ALTERNATIVA"),
+							new Peso(
+									rs.getInt("CD_PESO"),
+									rs.getInt("NR_NIVEL_GRAMATICA"),
+									rs.getInt("NR_NIVEL_VOCABULARIO"),
+									rs.getInt("NR_NIVEL_INTERPRETACAO"),
+									rs.getInt("NR_NIVEL_IMERSAO"))
+							);
+		}else {
+			return new Questao();
+		}
+	}
 
 
-/**
- * Responsável por apagar uma linha na tabela T_SIC_QUESTAO
- * @param numero Recebe um objeto do Tipo Integer.
- * @return O número de linhas afetadas.
- * @throws Exception Chamada da exceção checked.
- * @author Fábio Salgarella
- */
+	/**
+	 * Responsável por apagar uma linha na tabela T_SIC_QUESTAO
+	 * @param numero Recebe um objeto do Tipo Integer.
+	 * @return O número de linhas afetadas.
+	 * @throws Exception Chamada da exceção checked.
+	 * @author Fábio Salgarella
+	 */
 
-public int apagar(int numero) throws Exception {
-	stmt = con.prepareStatement("DELETE FROM T_SIC_QUESTAO WHERE CD_QUESTAO=?");
-	stmt.setInt(1, numero);
-	return stmt.executeUpdate();
-}
-/**
- * Responsável por alterar uma linha na tabela T_SIC_QUESTAO
- * @param q Recebe um objeto do Tipo Questao Beans.
- * @return O número de linhas alteradas.
- * @throws Exception Chamada da exceção checked.
- * @author Fábio Salgarella
- */
-public String atualizar(Questao q) throws Exception {
-	stmt = con.prepareStatement("UPDATE T_SIC_QUESTAO SET DS_TIPO=?, DS_ENUNCIADO=?, DS_GABARITO=?, DS_ALTERNATIVA=?, CD_PESO=? WHERE CD_QUESTAO=?");
-	stmt.setInt(6, q.getCodigo());
-	stmt.setInt(1, q.getTipo());
-	stmt.setString(2, q.getEnunciado());
-	stmt.setString(3, q.getGabarito());
-	stmt.setString(4, q.getAlternativa());
-	stmt.setInt(5, q.getPeso().getCodigo());
-	
-	return stmt.executeUpdate() + " linhas foram afetadas!";
-}
-public void fechar() throws Exception {
-	con.close();
-}
+	public int apagar(int numero) throws Exception {
+		stmt = con.prepareStatement("DELETE FROM T_SIC_QUESTAO WHERE CD_QUESTAO=?");
+		stmt.setInt(1, numero);
+		return stmt.executeUpdate();
+	}
+	/**
+	 * Responsável por alterar uma linha na tabela T_SIC_QUESTAO
+	 * @param q Recebe um objeto do Tipo Questao Beans.
+	 * @return O número de linhas alteradas.
+	 * @throws Exception Chamada da exceção checked.
+	 * @author Fábio Salgarella
+	 */
+	public String atualizar(Questao q) throws Exception {
+		stmt = con.prepareStatement("UPDATE T_SIC_QUESTAO SET DS_TIPO=?, DS_ENUNCIADO=?, DS_GABARITO=?, DS_ALTERNATIVA=?, CD_PESO=? WHERE CD_QUESTAO=?");
+		stmt.setInt(6, q.getCodigo());
+		stmt.setInt(1, q.getTipo());
+		stmt.setString(2, q.getEnunciado());
+		stmt.setString(3, q.getGabarito());
+		stmt.setString(4, q.getAlternativa());
+		stmt.setInt(5, q.getPeso().getCodigo());
+
+		return stmt.executeUpdate() + " linhas foram afetadas!";
+	}
+	/**
+	 * Responsável por fechar conexão com o banco
+	 * @throws Exception Chamada da exceção checked.
+	 * @author Fábio Salgarella
+	 */
+	public void fechar() throws Exception {
+		con.close();
+	}
 }

@@ -1,6 +1,6 @@
 package beans;
 
-public class Endereco {
+public class Endereco implements Comparable<Endereco> {
 	private int codigo;
 	private String cep;
 	private String uf;
@@ -8,7 +8,11 @@ public class Endereco {
 	private String logradouro;
 	private String numero;
 	
-	
+	//CompareTo
+	public int compareTo(Endereco outroEnd) {
+		return this.cidade.compareTo(outroEnd.cidade);
+	}
+
 	//GetAll
 	public String getAll() {
 		return "Código....: "+codigo+"\n"+

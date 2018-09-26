@@ -1,6 +1,6 @@
 package beans;
 
-public class Questao {
+public class Questao implements Comparable<Questao>{
 	private int codigo;
 	private int tipo;
 	private String enunciado;
@@ -8,6 +8,11 @@ public class Questao {
 	private String alternativa;
 	private Peso peso;
 	
+	//CompareTo
+		public int compareTo(Questao outraQuest) {
+			return this.enunciado.compareTo(outraQuest.enunciado);
+		}
+		
 	//getAll
 	public String getAll() {
 		return "Código......: "+codigo+"\n"+

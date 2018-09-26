@@ -23,6 +23,7 @@ public class TesteAlterarUsuario {
 					Integer.parseInt(JOptionPane.showInputDialog("Novo Tipo")), 
 					new Endereco (Integer.parseInt(JOptionPane.showInputDialog("Novo codigo de endereço")))
 					);
+			System.out.println(dao.atualizar(usu));
 		} catch (Exception e ) {
 			e.printStackTrace();
 			System.out.println(Excecao.tratarExcecao(e));

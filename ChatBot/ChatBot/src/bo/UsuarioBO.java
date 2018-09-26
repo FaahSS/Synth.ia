@@ -1,5 +1,9 @@
 package bo;
 
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import beans.Usuario;
 import dao.UsuarioDAO;
 
@@ -45,6 +49,28 @@ public class UsuarioBO {
 		}
 		dao.fechar();
 		return x;
+	}
+	
+	public static String consultarUsuario(Usuario u) throws Exception {
+		if(u.getNome().length()>60) {
+			return "Nome muito longo";
+		}
+		if(u.getNome().length()<1) {
+			return "Nenhum dado Informado";
+		}
+		UsuarioDAO dao = new UsuarioDAO();
+		List<Usuario> result = dao.consultarPorNome(u.getNome());
+		if(!result.isEmpty()) {
+			for(Usuario nome : result ) {
+		    return nome.getAll() + "\n" + "\n";
+				
+			}
+		} else {
+			dao.fechar();
+			return "Usuário não encontrado";
+		}
+		dao.fechar();
+		return "------ Fim da Consulta ------";
 	}
 	
 	

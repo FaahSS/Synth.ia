@@ -38,15 +38,16 @@ public class NivelamentoDAO {
 		con = new Conexao().conectar();
 	}
 	
-	public void adicionarQuestao(Nivelamento n,Questao q) {
-		n.getQuestao().add(q);
-	}
 	
-	public void excluirQuestao(Nivelamento n, Questao q) {
-		n.getQuestao().remove(q);
-	}
-	public void qtdQuestoes(Nivelamento n, Questao q) {
-		n.getQuestao().size();
+	public String gravarNivQuest(Nivelamento n, Questao q) throws Exception {
+		stmt = con.prepareStatement("INSERT INTO T_SIC_NIVELAMENTO_QUESTAO (CD_NIVELAMENTO, CD_USUARIO, CD_QUESTAO) VALUES (?, ?, ?)");
+		stmt.setInt(1, n.getCodigo());
+		stmt.setInt(2, n.getCodigoUsuario().getCodigo());
+		stmt.setInt(3, q.getCodigo());
+		
+		stmt.executeUpdate();
+		
+		return "Nivelamento / Questão Cadastrado com Sucesso!";
 	}
 	/**
 	 * Responsável por adicionar uma linha na tabela T_SIC_NIVELAMENTO
@@ -150,6 +151,11 @@ public class NivelamentoDAO {
 		return stmt.executeUpdate() + " linhas foram afetadas!";
 	}
 	
+	/**
+	 * Responsável por fechar conexão com o banco
+	 * @throws Exception Chamada da exceção checked.
+	 * @author Fábio Salgarella
+	 */
 	public void fechar() throws Exception {
 		con.close();
 	}

@@ -3,7 +3,7 @@ package beans;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Nivelamento {
+public class Nivelamento implements Comparable<Nivelamento> {
 	private int codigo;
 	private int acerto;
 	private String data;
@@ -11,6 +11,10 @@ public class Nivelamento {
 	private Usuario codigoUsuario;
 	private List<Questao> questao = new ArrayList<Questao>();
 	
+	//CompareTo
+	public int compareTo(Nivelamento outroNiv) {
+		return this.tipo.compareTo(outroNiv.tipo);
+	}
 	//GetAll
 	public String getAll() {
 		return "Código.............: "+codigo+"\n"+

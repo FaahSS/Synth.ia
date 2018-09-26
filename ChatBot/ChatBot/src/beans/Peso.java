@@ -1,12 +1,23 @@
 package beans;
 
-public class Peso {
+public class Peso implements Comparable<Peso> {
 	private int codigo;
 	private int gramatica;
 	private int vocabulario;
 	private int interpretacao;
 	private int imersao;
 	
+	//CompareTo
+		public int compareTo(Peso outroPeso) {
+			if (this.imersao<outroPeso.imersao) {
+				return -1;
+			} else if (this.imersao>outroPeso.imersao) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
+		
 	//GetAll
 	public String getAll() {
 		return "Código.......: "+codigo+"\n"+

@@ -1,8 +1,6 @@
 package beans;
 
-import java.util.Date;
-
-public class Usuario {
+public class Usuario implements Comparable<Usuario>{
 	private int codigo;
 	private String nome;
 	private String email;
@@ -12,6 +10,11 @@ public class Usuario {
 	private String cpf;
 	private int tipo;
 	private Endereco endereco;
+	
+	//CompareTo
+		public int compareTo(Usuario outroUsuario) {
+			return this.nome.compareTo(outroUsuario.nome);
+		}
 	
 	
 	//GetAll
